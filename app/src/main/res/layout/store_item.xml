@@ -16,7 +16,7 @@
         android:padding="12dp" >
 
         <ImageView
-            android:id="@+id/iv_store_photo"
+            android:id="@+id/iv_scan_result"
             android:layout_width="85dp"
             android:layout_height="85dp"
             android:src="@drawable/store_placeholder"
@@ -26,7 +26,7 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/tv_item_store"
+            android:id="@+id/tv_scan_batik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -39,8 +39,8 @@
             card_view:layout_constraintBottom_toTopOf="@+id/tv_item_address"
             card_view:layout_constraintEnd_toStartOf="@+id/iv_arrow"
             card_view:layout_constraintHorizontal_bias="0.0"
-            card_view:layout_constraintStart_toEndOf="@+id/iv_store_photo"
-            card_view:layout_constraintTop_toTopOf="@+id/iv_store_photo" />
+            card_view:layout_constraintStart_toEndOf="@+id/iv_scan_result"
+            card_view:layout_constraintTop_toTopOf="@+id/iv_scan_result" />
 
         <TextView
             android:id="@+id/tv_item_address"
@@ -54,8 +54,8 @@
             card_view:layout_constraintBottom_toTopOf="@+id/tv_item_operational_distance"
             card_view:layout_constraintEnd_toStartOf="@+id/iv_arrow"
             card_view:layout_constraintHorizontal_bias="0.0"
-            card_view:layout_constraintStart_toEndOf="@+id/iv_store_photo"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_item_store" />
+            card_view:layout_constraintStart_toEndOf="@+id/iv_scan_result"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_scan_batik" />
 
         <TextView
             android:id="@+id/tv_item_operational_distance"
@@ -66,7 +66,7 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toStartOf="@+id/iv_arrow"
             card_view:layout_constraintHorizontal_bias="0.0"
-            card_view:layout_constraintStart_toEndOf="@+id/iv_store_photo"
+            card_view:layout_constraintStart_toEndOf="@+id/iv_scan_result"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_item_address" />
 
         <ImageView

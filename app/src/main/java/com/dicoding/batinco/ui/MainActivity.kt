@@ -1,4 +1,4 @@
-package com.dicoding.batinco.ui.splashscreen
+package com.dicoding.batinco.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

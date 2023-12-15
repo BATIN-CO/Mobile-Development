@@ -43,7 +43,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="22sp"
-                android:text="@string/item_batik" />
+                android:text="@string/batik_name" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="18sp"
-                android:text="@string/item_origin" />
+                android:text="@string/batik_origin" />
 
         </LinearLayout>
     </FrameLayout>
