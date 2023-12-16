@@ -9,12 +9,15 @@
     <string name="batik_name">Batik Name</string>
     <string name="batik_origin">Batik Origin</string>
 
-    <string name="detail_meaning">Sasirangan adalah kain tradisional yang berasal dari Kalimantan Selatan yang telah ditetapkan oleh Kementerian Pendidikan dan Kebudayaan sebagai salah satu dari 33 kain tradisional warisan budaya tak benda di Indonesia. Sasirangan berasal dari kata sirang atau manyirang yang dalam bahasa banjar berarti menjelujur atau teknik menjahit menggunakan tangan. Motifnya dibuat dengan jahitan dengan teknik jelujur.\n\nKain batik sasirangan dahulunya merupakan kain tenun yang digunakan sebagai pakaian adat untuk kegiatan upacara adat yang berlaku di suku banjar. Menurut kepercayaan masyarakat banjar kain batik sasirangan dapat digunakan sebagai “obat” untuk kesembuhan bagi orang yang terkena musibah yaitu suatu penyakit (pamintaan).</string>
+    <string name="detail_meaning">Batik Meaning</string>
 
     <string name="scan">Scan Result</string>
     <string name="scan_percent">%1$s%</string>
     <string name="scan_back">Back to Camera</string>
 
+    <string name="menu_home">Home</string>
+    <string name="menu_discover">Discover</string>
+    <string name="menu_scan">Scan Batik</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

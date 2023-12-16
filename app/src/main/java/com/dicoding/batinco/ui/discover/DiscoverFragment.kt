@@ -1,60 +1,73 @@
 package com.dicoding.batinco.ui.discover
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dicoding.batinco.R
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.batinco.data.response.RowsItem
+import com.dicoding.batinco.databinding.FragmentDiscoverBinding
+import com.dicoding.batinco.ui.detail.DetailActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DiscoverFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DiscoverFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentDiscoverBinding
+    private val discoverViewModel by viewModels<DiscoverViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_discover, container, false)
+    ): View {
+        binding = FragmentDiscoverBinding.inflate(layoutInflater, container, false)
+        return binding.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DiscoverFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DiscoverFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val layoutManager = LinearLayoutManager(context)
+        binding.rvBatikDiscover.layoutManager = layoutManager
+
+        discoverViewModel.getAllBatik()
+
+        discoverViewModel.batik.observe(viewLifecycleOwner) {
+            setBatikData(it)
+        }
+
+        discoverViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
     }
+
+    private fun setBatikData(batikList: List<RowsItem>) {
+        val adapter = DiscoverAdapter()
+        adapter.submitList(batikList)
+        binding.rvBatikDiscover.adapter = adapter
+
+        adapter.setOnItemClickCallback(object : DiscoverAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: RowsItem) {
+//                val bundle = Bundle()
+//                bundle.putInt(EXTRA_ID, data.batikId)
+//                NavHostFragment
+//                    .findNavController(this@DiscoverFragment)
+//                    .navigate(R.id.action_navigation_discover_to_navigation_detail, bundle)
+
+                val intentToDetail = Intent(requireActivity(), DetailActivity::class.java)
+                intentToDetail.putExtra("EXTRA_ID", data.batikId)
+                startActivity(intentToDetail)
+            }
+        })
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+
+    }
+
+//    companion object {
+//        const val EXTRA_ID = "extra_id"
+//    }
+
 }

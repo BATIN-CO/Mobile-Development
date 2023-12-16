@@ -16,6 +16,9 @@
         android:theme="@style/Theme.BATINCO"
         tools:targetApi="31">
         <activity
+            android:name=".ui.detail.DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="false" />
         <activity
