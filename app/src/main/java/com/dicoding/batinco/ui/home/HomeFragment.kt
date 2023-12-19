@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.dicoding.batinco.R
 import com.dicoding.batinco.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -26,6 +28,10 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.cvScan.setOnClickListener {
+            it.findNavController().navigate(R.id.action_navigation_home_to_navigation_scan)
+        }
 
         return root
     }

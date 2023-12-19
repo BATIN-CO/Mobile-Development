@@ -11,53 +11,77 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/iv_home_banner"
+            <FrameLayout
+                android:id="@+id/fl_banner"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/banner"
-                tools:ignore="ContentDescription" />
+                android:layout_height="wrap_content">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:background="@drawable/banner_effect"/>
+                <ImageView
+                    android:id="@+id/iv_home_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/banner"
+                    tools:ignore="ContentDescription" />
 
-            <com.google.android.material.search.SearchBar
-                android:id="@+id/searchBar"
-                android:layout_width="match_parent"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/banner_effect"/>
+
+                <com.google.android.material.search.SearchBar
+                    android:id="@+id/searchBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="24dp"
+                    android:hint="@string/home_search_hint">
+                </com.google.android.material.search.SearchBar>
+
+                <com.google.android.material.search.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/home_search_hint"
+                    app:layout_anchor="@id/searchBar">
+                </com.google.android.material.search.SearchView>
+
+                <TextView
+                    android:id="@+id/tv_home_greeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/home_greeting"
+                    android:textStyle="bold"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/white"
+                    android:textSize="45sp" />
+
+            </FrameLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_scan"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="24dp"
-                android:hint="@string/home_search_hint">
-            </com.google.android.material.search.SearchBar>
-
-            <com.google.android.material.search.SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/home_search_hint"
-                app:layout_anchor="@id/searchBar">
-            </com.google.android.material.search.SearchView>
-
-            <TextView
-                android:id="@+id/tv_home_greeting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/home_greeting"
-                android:textStyle="bold"
-                android:layout_gravity="bottom"
-                android:textColor="@color/white"
-                android:textSize="45sp" />
-
-        </FrameLayout>
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="@color/design_default_color_primary"
+                app:layout_constraintTop_toBottomOf="@+id/fl_banner">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/design_default_color_on_primary"
+                    android:text="@string/home_scan_button"
+                    android:layout_gravity="center"
+                    android:drawablePadding="8dp"
+                    app:drawableEndCompat="@drawable/ic_menu_scan"
+                    app:drawableTint="@color/design_default_color_on_primary" />
+            </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_home_content"

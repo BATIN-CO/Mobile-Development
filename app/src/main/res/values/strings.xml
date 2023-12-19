@@ -21,6 +21,7 @@
 
     <string name="home_search_hint">Search batik</string>
     <string name="home_greeting">Greeting!\nFriends</string>
+    <string name="home_scan_button">Discover your batik here!</string>
 
     <string name="cam_capture">Capture photo</string>
 

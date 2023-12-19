@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_detailActivity"
             app:destination="@id/detailActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_scan"
+            app:destination="@id/navigation_scan" />
     </fragment>
 
     <fragment
@@ -33,6 +36,9 @@
         <action
             android:id="@+id/action_navigation_scan_to_uploadFragment"
             app:destination="@id/uploadFragment" />
+        <action
+            android:id="@+id/action_navigation_scan_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
     <fragment
         android:id="@+id/uploadFragment"
@@ -42,6 +48,9 @@
         <action
             android:id="@+id/action_uploadFragment_to_scanResultFragment"
             app:destination="@id/scanResultFragment" />
+        <action
+            android:id="@+id/action_uploadFragment_to_navigation_scan"
+            app:destination="@id/navigation_scan" />
     </fragment>
     <fragment
         android:id="@+id/scanResultFragment"
@@ -51,6 +60,9 @@
         <action
             android:id="@+id/action_scanResultFragment_to_detailActivity"
             app:destination="@id/detailActivity" />
+        <action
+            android:id="@+id/action_scanResultFragment_to_navigation_scan"
+            app:destination="@id/navigation_scan" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"
