@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
 //        ).build()
 //
 //        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        binding.fabMenuScan.setOnClickListener {
+
+        }
+
         navView.setupWithNavController(navController)
     }
 }

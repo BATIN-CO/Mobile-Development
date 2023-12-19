@@ -10,17 +10,19 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.batinco.data.response.RowsItem
 import com.dicoding.batinco.databinding.FragmentDiscoverBinding
+import com.dicoding.batinco.databinding.FragmentHomeBinding
 import com.dicoding.batinco.ui.detail.DetailActivity
 
 class DiscoverFragment : Fragment() {
-    private lateinit var binding: FragmentDiscoverBinding
+    private var _binding: FragmentDiscoverBinding? = null
+    private val binding get() = _binding!!
     private val discoverViewModel by viewModels<DiscoverViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDiscoverBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentDiscoverBinding.inflate(layoutInflater, container, false)
         return binding.root
 
     }
@@ -64,6 +66,11 @@ class DiscoverFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 //    companion object {

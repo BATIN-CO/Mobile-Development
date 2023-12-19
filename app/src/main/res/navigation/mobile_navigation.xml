@@ -9,19 +9,54 @@
         android:id="@+id/navigation_home"
         android:name="com.dicoding.batinco.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_discover"
         android:name="com.dicoding.batinco.ui.discover.DiscoverFragment"
         android:label="@string/menu_discover"
-        tools:layout="@layout/fragment_discover" />
+        tools:layout="@layout/fragment_discover" >
+        <action
+            android:id="@+id/action_navigation_discover_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
 
     <fragment
-        android:id="@+id/fab_menu_scan"
+        android:id="@+id/navigation_scan"
         android:name="com.dicoding.batinco.ui.scan.ScanFragment"
         android:label="fragment_scan"
-        tools:layout="@layout/fragment_scan" />
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/action_navigation_scan_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.dicoding.batinco.ui.scan.UploadFragment"
+        android:label="fragment_upload"
+        tools:layout="@layout/fragment_upload" >
+        <action
+            android:id="@+id/action_uploadFragment_to_scanResultFragment"
+            app:destination="@id/scanResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanResultFragment"
+        android:name="com.dicoding.batinco.ui.scanresult.ScanResultFragment"
+        android:label="fragment_scan_result"
+        tools:layout="@layout/fragment_scan_result" >
+        <action
+            android:id="@+id/action_scanResultFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.dicoding.batinco.ui.detail.DetailActivity"
+        android:label="activity_detail"
+        tools:layout="@layout/activity_detail" />
 
     <!--    <fragment-->
 <!--        android:id="@+id/navigation_profile"-->
