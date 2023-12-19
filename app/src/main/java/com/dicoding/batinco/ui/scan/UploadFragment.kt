@@ -13,9 +13,6 @@ import com.dicoding.batinco.databinding.FragmentUploadBinding
 class UploadFragment : DialogFragment() {
 
     private var _binding: FragmentUploadBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
 

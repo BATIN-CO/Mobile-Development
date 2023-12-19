@@ -150,10 +150,10 @@ class ScanFragment : Fragment() {
             ContextCompat.getMainExecutor(requireActivity()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val intent = Intent()
-                    intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
-                    activity!!.setResult(CAMERAX_RESULT, intent)
-                    activity!!.finish()
+//                    val intent = Intent()
+//                    intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
+//                    activity!!.setResult(CAMERAX_RESULT, intent)
+//                    activity!!.finish()
                     showDialog()
                 }
 
@@ -169,6 +169,7 @@ class ScanFragment : Fragment() {
         )
     }
 
+    //Stuck dibagian ini, expect: kirim file yang didapat baik gallery atau kamera ke dialogfragment upload
     fun showDialog(){
         val uploadDialogFragment = UploadFragment()
 
