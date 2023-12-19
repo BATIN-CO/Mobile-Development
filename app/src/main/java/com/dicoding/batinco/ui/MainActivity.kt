@@ -8,6 +8,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dicoding.batinco.R
 import com.dicoding.batinco.databinding.ActivityMainBinding
+import com.dicoding.batinco.ui.scan.ScanFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
