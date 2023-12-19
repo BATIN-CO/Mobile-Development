@@ -52,7 +52,9 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    //Image online
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     //Handle response and API
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -66,5 +68,14 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
+    //Camera Library
+    implementation("androidx.camera:camera-camera2:1.3.1")
+    implementation("androidx.camera:camera-lifecycle:1.3.1")
+    implementation("androidx.camera:camera-view:1.3.1")
+
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
+
+    //Menggunakan library Fragment-KTX
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
 
 }

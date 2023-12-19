@@ -38,6 +38,14 @@
                 android:hint="@string/home_search_hint">
             </com.google.android.material.search.SearchBar>
 
+            <com.google.android.material.search.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/home_search_hint"
+                app:layout_anchor="@id/searchBar">
+            </com.google.android.material.search.SearchView>
+
             <TextView
                 android:id="@+id/tv_home_greeting"
                 android:layout_width="match_parent"
