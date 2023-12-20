@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -44,43 +45,48 @@ class MainActivity : AppCompatActivity() {
 //            it.findNavController().navigate(R.id.navigation_scan)
 //        }
 
-//        val fragmentManager = supportFragmentManager
-//        // Ambil fragment yang saat ini ditampilkan
-//        // Percabangan untuk memeriksa fragment
-//        when (fragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)) {
-//            is HomeFragment -> {
-//                binding.navView.visibility = View.VISIBLE
-//            }
-//
-//            is DiscoverFragment -> {
-//                binding.navView.visibility = View.VISIBLE
-//            }
-//
-//            else -> {
-//                 binding.navView.visibility = View.GONE
-//            }
-//        }
-
 //        navView.setupWithNavController(navController)
 
-            val navHostFragment = supportFragmentManager.findFragmentById(
-                R.id.nav_host_fragment_activity_main
-            ) as NavHostFragment
-            navController = navHostFragment.navController
+        val navHostFragment = supportFragmentManager.findFragmentById(
+            R.id.nav_host_fragment_activity_main
+        ) as NavHostFragment
+        navController = navHostFragment.navController
 
-            // Setup the bottom navigation view with navController
-            val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
-            bottomNavigationView.setupWithNavController(navController)
+        // Setup the bottom navigation view with navController
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNavigationView.setupWithNavController(navController)
 
-            // Setup the ActionBar with navController and 2 top level destinations
-            appBarConfiguration = AppBarConfiguration(
-                setOf(R.id.navigation_home, R.id.navigation_discover)
-            )
+        // Setup the ActionBar with navController and 2 top level destinations
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.navigation_home, R.id.navigation_discover)
+        )
+
+//        binding.fabMenuScan.setOnClickListener {
+//            supportFragmentManager
+//                .beginTransaction().apply {
+//                    replace(
+//                        R.id.nav_host_fragment_activity_main,
+//                        ScanFragment(),
+//                        ScanFragment::class.java.simpleName
+//                    )
+//                    addToBackStack(null)
+//                    commit()
+//                }
+//        }
+
+        navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
+            if (nd.id == R.id.navigation_scan || nd.id == R.id.detailActivity || nd.id == R.id.navigation_scan) {
+                binding.navView.visibility = View.GONE
+            } else {
+                binding.navView.visibility = View.VISIBLE
+            }
+        }
+
 //            setupActionBarWithNavController(navController, appBarConfiguration)
-        }
+    }
 
-        override fun onSupportNavigateUp(): Boolean {
-            return navController.navigateUp(appBarConfiguration)
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration)
+    }
 
 }
