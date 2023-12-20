@@ -24,7 +24,6 @@ class DiscoverFragment : Fragment() {
     ): View {
         _binding = FragmentDiscoverBinding.inflate(layoutInflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -53,7 +53,10 @@
             app:destination="@id/scanResultFragment" />
         <action
             android:id="@+id/action_uploadFragment_to_navigation_scan"
-            app:destination="@id/navigation_scan" />
+            app:destination="@id/navigation_scan"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_scan"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/scanResultFragment"

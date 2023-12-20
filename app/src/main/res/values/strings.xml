@@ -29,9 +29,9 @@
     <string name="dialog_confirm">Upload this photo?</string>
     <string name="dialog_retry">Retry</string>
     <string name="dialog_object_detect">Detect the batik</string>
-    <string name="dialog_object_detect_desc">Identify the batik of the clothes</string>
+    <string name="dialog_object_detect_desc">Identify the batik\nof the clothes</string>
     <string name="dialog_motif">Detect the motif</string>
-    <string name="dialog_motif_desc">Determine the motif of this batik</string>
+    <string name="dialog_motif_desc">Determine the motif\nof this batik</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

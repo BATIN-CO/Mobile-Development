@@ -7,16 +7,154 @@
     android:orientation="vertical"
     tools:context=".ui.scan.UploadFragment">
 
-    <include
-        android:id="@+id/included_top"
-        layout="@layout/dialog_confirm_part"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <!--    <include-->
+    <!--        android:id="@+id/included_top"-->
+    <!--        layout="@layout/dialog_confirm_part"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"/>-->
 
-    <include
-        android:id="@+id/included_bottom"
-        layout="@layout/dialog_option_part"
+    <!--    <include-->
+    <!--        android:id="@+id/included_bottom"-->
+    <!--        layout="@layout/dialog_option_part"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"/>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialog_confirm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_dialog_title"
+            app:layout_constraintEnd_toStartOf="@+id/tv_dialog_confirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_dialog_preview"
+                android:layout_width="105dp"
+                android:layout_height="175dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/batik_placeholder"
+                tools:ignore="ContentDescription" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_dialog_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="@string/dialog_confirm"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_dialog_retry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cv_dialog"
+            app:layout_constraintTop_toTopOf="@+id/cv_dialog" />
+
+        <Button
+            android:id="@+id/btn_dialog_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/dialog_retry"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cv_dialog"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_confirm" />
+
+        <TextView
+            android:id="@+id/tv_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:text="@string/dialog_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/cv_dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layout_obj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_marginVertical="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_title"
+            app:layout_constraintEnd_toStartOf="@+id/layout_motif"
+            >
+
+            <TextView
+                android:id="@+id/tv_dialog_obj_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:gravity="center"
+                android:text="@string/dialog_object_detect_desc" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_dialog_obj"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/object_detection" />
+
+            <Button
+                android:id="@+id/btn_dialog_obj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_object_detect" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_motif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_marginVertical="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_title"
+            app:layout_constraintStart_toEndOf="@+id/layout_obj">
+
+
+            <TextView
+                android:id="@+id/tv_dialog_motif_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:gravity="center"
+                android:text="@string/dialog_motif_desc" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_dialog_motif"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/motif"
+                />
+
+            <Button
+                android:id="@+id/btn_dialog_motif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_motif" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
