@@ -140,9 +140,7 @@ class ScanFragment : Fragment() {
 
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
-
         val photoFile = createCustomTempFile(requireActivity())
-
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
         imageCapture.takePicture(
@@ -154,6 +152,7 @@ class ScanFragment : Fragment() {
 //                    intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
 //                    activity!!.setResult(CAMERAX_RESULT, intent)
 //                    activity!!.finish()
+
                     showDialog()
                 }
 

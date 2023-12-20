@@ -1,5 +1,6 @@
 package com.dicoding.batinco.ui.scan
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,14 +30,33 @@ class UploadFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnDialogRetry.setOnClickListener {
-            it.findNavController().navigate(R.id.action_uploadFragment_to_navigation_scan)
+//            it.findNavController().navigate(R.id.action_uploadFragment_to_navigation_scan)
+            dialog?.dismiss()
         }
+
+        binding.btnDialogObj.setOnClickListener {
+
+        }
+
+        binding.btnDialogMotif.setOnClickListener {
+
+        }
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val fragment = parentFragment
 
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        var EXTRA_FILE = "extra_file"
     }
 
 }
