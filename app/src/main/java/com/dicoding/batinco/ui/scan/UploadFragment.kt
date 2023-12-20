@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.findNavController
 import com.dicoding.batinco.R
@@ -28,6 +29,11 @@ class UploadFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (arguments != null) {
+            currentImageUri = arguments?.getString(EXTRA_FILE)!!.toUri()
+            binding.ivDialogPreview.setImageURI(currentImageUri)
+        }
 
         binding.btnDialogRetry.setOnClickListener {
 //            it.findNavController().navigate(R.id.action_uploadFragment_to_navigation_scan)

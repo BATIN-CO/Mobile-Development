@@ -26,6 +26,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.batinco.R
 import com.dicoding.batinco.databinding.FragmentDiscoverBinding
@@ -99,7 +100,11 @@ class ScanFragment : Fragment() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
-            showDialog()
+            val imageUri = currentImageUri.toString()
+            val bundle = Bundle().apply {
+                putString(UploadFragment.EXTRA_FILE, imageUri)
+            }
+            showDialog(bundle)
         } else {
             Log.d("Photo Picker", "No media selected")
         }
@@ -153,7 +158,11 @@ class ScanFragment : Fragment() {
 //                    activity!!.setResult(CAMERAX_RESULT, intent)
 //                    activity!!.finish()
 
-                    showDialog()
+                    val imageUri = output.savedUri.toString()
+                    val bundle = Bundle().apply {
+                        putString(UploadFragment.EXTRA_FILE, imageUri)
+                    }
+                    showDialog(bundle)
                 }
 
                 override fun onError(exc: ImageCaptureException) {
@@ -170,8 +179,9 @@ class ScanFragment : Fragment() {
 
     //Stuck dibagian ini, expect: kirim file yang didapat baik gallery atau kamera ke dialogfragment upload
     //Show success, but no data yet
-    fun showDialog(){
+    fun showDialog(bundle: Bundle){
         val uploadDialogFragment = UploadFragment()
+        uploadDialogFragment.arguments = bundle
 
         val fragmentManager = childFragmentManager
         uploadDialogFragment.show(fragmentManager, UploadFragment::class.java.simpleName)
@@ -226,7 +236,6 @@ class ScanFragment : Fragment() {
     companion object {
         private const val TAG = "ScanFragment"
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
-        const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
         const val CAMERAX_RESULT = 200
     }
 }
