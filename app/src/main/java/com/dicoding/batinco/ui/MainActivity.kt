@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
-            if (nd.id == R.id.navigation_scan || nd.id == R.id.detailActivity || nd.id == R.id.navigation_scan) {
+            if (nd.id == R.id.navigation_scan || nd.id == R.id.detailActivity || nd.id == R.id.scanResultFragment) {
                 binding.navView.visibility = View.GONE
             } else {
                 binding.navView.visibility = View.VISIBLE

@@ -23,6 +23,9 @@
     <string name="home_greeting">Greeting!\nFriends</string>
     <string name="home_scan_button">Discover your batik here!</string>
 
+    <string name="error">Timeout</string>
+    <string name="reload">Reload</string>
+
     <string name="cam_capture">Capture photo</string>
 
     <string name="dialog_title">Choose one..</string>

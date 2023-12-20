@@ -28,6 +28,13 @@ interface ApiService {
     @GET("tampil/0")
     fun getAllBatik(): Call<BatikResponse>
 
+    //if using paging
+    @GET("tampil/0")
+    suspend fun getAllBatik(
+        @Query("page") page: Int = 1,
+        @Query("size") size: Int = 5
+    ): BatikResponse
+
     @GET("tampil/{id}")
     fun getBatik(@Path("id") id: Int): Call<DetailBatikResponse>
 }
