@@ -21,10 +21,10 @@ class BatikRepository(
     private val apiService: ApiService
 ) {
 
-    fun uploadMotifImage(file: MultipartBody.Part) = liveData {
+    fun uploadMotifImage(picture: MultipartBody.Part) = liveData {
         emit(ResultState.Loading)
         try {
-            val successResponse = apiService.uploadImageMotif(file)
+            val successResponse = apiService.uploadImageMotif(picture)
             emit(ResultState.Success(successResponse))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
@@ -33,10 +33,10 @@ class BatikRepository(
         }
     }
 
-    fun uploadObjectImage(file: MultipartBody.Part) = liveData {
+    fun uploadObjectImage(picture: MultipartBody.Part) = liveData {
         emit(ResultState.Loading)
         try {
-            val successResponse = apiService.uploadImageObject(file)
+            val successResponse = apiService.uploadImageObject(picture)
             emit(ResultState.Success(successResponse))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()

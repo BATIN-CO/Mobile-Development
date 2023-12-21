@@ -19,23 +19,36 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.batinco.R
 import com.dicoding.batinco.databinding.FragmentDiscoverBinding
 import com.dicoding.batinco.databinding.FragmentScanBinding
+import com.dicoding.batinco.ui.ViewModelFactory
+import com.dicoding.batinco.utils.ResultState
 import com.dicoding.batinco.utils.createCustomTempFile
+import com.dicoding.batinco.utils.reduceFileImage
+import com.dicoding.batinco.utils.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 
 class ScanFragment : Fragment() {
     private var _binding: FragmentScanBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel by viewModels<ScanViewModel> {
+        ViewModelFactory.getInstance()
+    }
 
     private val cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
@@ -231,7 +244,74 @@ class ScanFragment : Fragment() {
     internal var optionDialogListener: UploadFragment.OnOptionDialogListener = object : UploadFragment.OnOptionDialogListener {
         override fun onOptionChosen(text: String?) {
             Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT).show()
+
+            currentImageUri?.let { uri ->
+                val imageFile = uriToFile(uri, requireActivity()).reduceFileImage()
+
+                val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+                val multipartBody = MultipartBody.Part.createFormData(
+                    "photo", imageFile.name, requestImageFile
+                )
+
+                when (text) {
+                    "Object detection" -> {
+                        viewModel.uploadObjectDetect(multipartBody).observe(this@ScanFragment) { result ->
+                            if (result != null) {
+                                when (result) {
+                                    is ResultState.Success -> {
+                                        showLoading(false)
+                                        //navigate to scan result
+                                    }
+
+                                    is ResultState.Loading -> {
+                                        showLoading(true)
+                                    }
+
+                                    is ResultState.Error -> {
+                                        showLoading(false)
+                                        showToast("Server Error")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    "Motif" -> {
+                        viewModel.uploadMotif(multipartBody).observe(this@ScanFragment) { result ->
+                            if (result != null) {
+                                when (result) {
+                                    is ResultState.Success -> {
+                                        showLoading(false)
+                                        //navigate to scan result
+                                    }
+
+                                    is ResultState.Loading -> {
+                                        showLoading(true)
+                                    }
+
+                                    is ResultState.Error -> {
+                                        showLoading(false)
+                                        showToast("Server Error")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else -> {
+                        showToast("Unknown")
+                    }
+                }
+
+            }
         }
+    }
+
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

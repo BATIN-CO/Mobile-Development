@@ -1,19 +1,18 @@
 package com.dicoding.batinco.ui
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.batinco.data.BatikRepository
 import com.dicoding.batinco.di.Injection
-import com.dicoding.batinco.ui.scan.UploadViewModel
+import com.dicoding.batinco.ui.scan.ScanViewModel
 
 class ViewModelFactory(private val repository: BatikRepository) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(UploadViewModel::class.java) -> {
-                UploadViewModel(repository) as T
+            modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
+                ScanViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
