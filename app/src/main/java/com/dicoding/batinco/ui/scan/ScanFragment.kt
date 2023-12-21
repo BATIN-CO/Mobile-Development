@@ -194,7 +194,7 @@ class ScanFragment : Fragment() {
 
     //Stuck dibagian ini, expect: kirim file yang didapat baik gallery atau kamera ke dialogfragment upload
     //Show success, but no data yet
-    fun showDialog(bundle: Bundle){
+    fun showDialog(bundle: Bundle) {
         val uploadDialogFragment = UploadFragment()
         uploadDialogFragment.arguments = bundle
 
@@ -243,82 +243,94 @@ class ScanFragment : Fragment() {
         orientationEventListener.disable()
     }
 
-    internal var optionDialogListener: UploadFragment.OnOptionDialogListener = object : UploadFragment.OnOptionDialogListener {
-        override fun onOptionChosen(text: String?, image: String?) {
+    internal var optionDialogListener: UploadFragment.OnOptionDialogListener =
+        object : UploadFragment.OnOptionDialogListener {
+            override fun onOptionChosen(text: String?, image: String?) {
 //            Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT).show()
 
-            currentImageUri = image!!.toUri()
-            currentImageUri?.let { uri ->
-                val imageFile = uriToFile(uri, requireActivity()).reduceFileImage()
-                Log.d("Image File", "showImage: ${imageFile.path}")
-                showToast(currentImageUri.toString())
-                val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-                val multipartBody = MultipartBody.Part.createFormData(
-                    "picture", imageFile.name, requestImageFile
-                )
+                currentImageUri = image!!.toUri()
+                currentImageUri?.let { uri ->
+                    val imageFile = uriToFile(uri, requireActivity()).reduceFileImage()
+                    Log.d("Image File", "showImage: ${imageFile.path}")
+                    showToast(currentImageUri.toString())
+                    val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+                    val multipartBody = MultipartBody.Part.createFormData(
+                        "picture", imageFile.name, requestImageFile
+                    )
 
-                when (text) {
-                    "Object Detection" -> {
-                        showToast(text)
-                        viewModel.uploadObjectDetect(multipartBody).observe(this@ScanFragment) { result ->
-                            if (result != null) {
-                                when (result) {
-                                    is ResultState.Success -> {
-                                        showLoading(false)
-                                        //navigate to scan result
-                                        val photoData = image
-                                        val parcelData = viewModel.getDataObject()
+                    when (text) {
+                        "Object Detection" -> {
+                            showToast(text)
+                            viewModel.uploadObjectDetect(multipartBody)
+                                .observe(this@ScanFragment) { result ->
+                                    if (result != null) {
+                                        when (result) {
+                                            is ResultState.Success -> {
+                                                showLoading(false)
+                                                //navigate to scan result
 
-                                        val bundle = bundleOf(
-                                            "extra_photo" to photoData
-                                        )
+//                                                val toScanResultFragment =
+//                                                    ScanFragmentDirections.actionNavigationScanToScanResultFragment()
+//                                                toScanResultFragment.photo = image
+//                                                toScanResultFragment.dataObj =
+//                                                    viewModel.getDataObject()!!
 
-                                        view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultFragment)
-                                    }
+//                                                view!!.findNavController()
+//                                                    .navigate(toScanResultFragment)
+                                            }
 
-                                    is ResultState.Loading -> {
-                                        showLoading(true)
-                                    }
+                                            is ResultState.Loading -> {
+                                                showLoading(true)
+                                            }
 
-                                    is ResultState.Error -> {
-                                        showLoading(false)
-                                        showToast("Server Error")
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    "Motif" -> {
-                        showToast(text)
-                        viewModel.uploadMotif(multipartBody).observe(this@ScanFragment) { result ->
-                            if (result != null) {
-                                when (result) {
-                                    is ResultState.Success -> {
-                                        showLoading(false)
-                                        //navigate to scan result
-                                        view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultFragment)
-                                    }
-
-                                    is ResultState.Loading -> {
-                                        showLoading(true)
-                                    }
-
-                                    is ResultState.Error -> {
-                                        showLoading(false)
-                                        showToast("Server Error")
+                                            is ResultState.Error -> {
+                                                showLoading(false)
+                                                showToast("Server Error")
+                                            }
+                                        }
                                     }
                                 }
-                            }
+                        }
+
+                        "Motif" -> {
+                            showToast(text)
+                            viewModel.uploadMotif(multipartBody)
+                                .observe(this@ScanFragment) { result ->
+                                    if (result != null) {
+                                        when (result) {
+                                            is ResultState.Success -> {
+                                                showLoading(false)
+                                                //navigate to scan result
+//                                                val toScanResultFragment =
+//                                                    ScanFragmentDirections.actionNavigationScanToScanResultFragment()
+//                                                toScanResultFragment.photo = image
+//                                                toScanResultFragment.dataMotif =
+//                                                    viewModel.getDataMotif()!!
+//                                                view!!.findNavController()
+//                                                    .navigate(toScanResultFragment)
+                                            }
+
+                                            is ResultState.Loading -> {
+                                                showLoading(true)
+                                            }
+
+                                            is ResultState.Error -> {
+                                                showLoading(false)
+                                                showToast("Server Error")
+                                            }
+                                        }
+                                    }
+                                }
+                        }
+
+                        else -> {
+                            showToast("Unknown")
                         }
                     }
-                    else -> {
-                        showToast("Unknown")
-                    }
+
                 }
-
             }
         }
-    }
 
 
     private fun showToast(message: String) {
@@ -337,7 +349,5 @@ class ScanFragment : Fragment() {
     companion object {
         private const val TAG = "ScanFragment"
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
-        val EXTRA_PHOTO = "extra_photo"
-        val EXTRA_DATA = "extra_data"
     }
 }

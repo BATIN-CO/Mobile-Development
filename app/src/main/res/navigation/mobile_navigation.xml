@@ -45,16 +45,6 @@
         <action
             android:id="@+id/action_navigation_scan_to_scanResultFragment"
             app:destination="@id/scanResultFragment">
-            <argument
-                android:name="photo"
-                app:argType="string" />
-            <argument
-                android:name="extra_data_obj"
-                app:argType="com.dicoding.batinco.data.response.ObjectResponse"
-                />
-            <argument
-                android:name="extra_data_motif"
-                app:argType="com.dicoding.batinco.data.response.Prediction" />
         </action>
     </fragment>
     <fragment
@@ -102,12 +92,6 @@
         android:name="com.dicoding.batinco.ui.detail.DetailActivity"
         android:label="activity_detail"
         tools:layout="@layout/activity_detail" />
-
-    <!--    <fragment-->
-<!--        android:id="@+id/navigation_profile"-->
-<!--        android:name="com.dicoding.mybottomnavigation.ProfileFragment"-->
-<!--        android:label="@string/title_profile"-->
-<!--        tools:layout="@layout/fragment_profile" />-->
 
 </navigation>
 
