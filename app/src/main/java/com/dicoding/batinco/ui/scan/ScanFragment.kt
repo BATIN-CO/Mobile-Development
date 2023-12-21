@@ -261,6 +261,7 @@ class ScanFragment : Fragment() {
                                     is ResultState.Success -> {
                                         showLoading(false)
                                         //navigate to scan result
+                                        view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultFragment)
                                     }
 
                                     is ResultState.Loading -> {
@@ -282,6 +283,7 @@ class ScanFragment : Fragment() {
                                     is ResultState.Success -> {
                                         showLoading(false)
                                         //navigate to scan result
+                                        view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultFragment)
                                     }
 
                                     is ResultState.Loading -> {
