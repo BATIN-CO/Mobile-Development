@@ -44,7 +44,18 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_navigation_scan_to_scanResultFragment"
-            app:destination="@id/scanResultFragment" />
+            app:destination="@id/scanResultFragment">
+            <argument
+                android:name="photo"
+                app:argType="string" />
+            <argument
+                android:name="extra_data_obj"
+                app:argType="com.dicoding.batinco.data.response.ObjectResponse"
+                />
+            <argument
+                android:name="extra_data_motif"
+                app:argType="com.dicoding.batinco.data.response.Prediction" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/uploadFragment"
@@ -75,6 +86,16 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_home"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="photo"
+            app:argType="string"
+            android:defaultValue="default photo" />
+        <argument
+            android:name="dataObj"
+            app:argType="com.dicoding.batinco.data.response.ObjectResponse" />
+        <argument
+            android:name="dataMotif"
+            app:argType="com.dicoding.batinco.data.response.Prediction" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"

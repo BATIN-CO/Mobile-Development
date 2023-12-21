@@ -12,15 +12,7 @@ import com.dicoding.batinco.databinding.FragmentScanResultBinding
 class ScanResultFragment : Fragment() {
 
     private var _binding: FragmentScanResultBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +20,12 @@ class ScanResultFragment : Fragment() {
     ): View {
         _binding = FragmentScanResultBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
     }
 
     override fun onDestroyView() {

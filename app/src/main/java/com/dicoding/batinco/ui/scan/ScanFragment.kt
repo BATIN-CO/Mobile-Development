@@ -27,6 +27,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -246,7 +247,6 @@ class ScanFragment : Fragment() {
         override fun onOptionChosen(text: String?, image: String?) {
 //            Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT).show()
 
-            showToast(text!!)
             currentImageUri = image!!.toUri()
             currentImageUri?.let { uri ->
                 val imageFile = uriToFile(uri, requireActivity()).reduceFileImage()
@@ -254,11 +254,11 @@ class ScanFragment : Fragment() {
                 showToast(currentImageUri.toString())
                 val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
                 val multipartBody = MultipartBody.Part.createFormData(
-                    "photo", imageFile.name, requestImageFile
+                    "picture", imageFile.name, requestImageFile
                 )
 
                 when (text) {
-                    "Object detection" -> {
+                    "Object Detection" -> {
                         showToast(text)
                         viewModel.uploadObjectDetect(multipartBody).observe(this@ScanFragment) { result ->
                             if (result != null) {
@@ -266,6 +266,13 @@ class ScanFragment : Fragment() {
                                     is ResultState.Success -> {
                                         showLoading(false)
                                         //navigate to scan result
+                                        val photoData = image
+                                        val parcelData = viewModel.getDataObject()
+
+                                        val bundle = bundleOf(
+                                            "extra_photo" to photoData
+                                        )
+
                                         view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultFragment)
                                     }
 
@@ -330,6 +337,7 @@ class ScanFragment : Fragment() {
     companion object {
         private const val TAG = "ScanFragment"
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
-        const val CAMERAX_RESULT = 200
+        val EXTRA_PHOTO = "extra_photo"
+        val EXTRA_DATA = "extra_data"
     }
 }

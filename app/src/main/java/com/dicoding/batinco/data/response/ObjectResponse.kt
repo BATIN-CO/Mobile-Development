@@ -1,15 +1,18 @@
 package com.dicoding.batinco.data.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ObjectResponse(
 
+	@field:SerializedName("prediction")
+	val prediction: String,
+
 	@field:SerializedName("error")
-	val error: String,
+	val error: Boolean,
 
 	@field:SerializedName("message")
-	val message: String,
-
-	@field:SerializedName("statusCode")
-	val statusCode: Int
-)
+	val message: String
+) : Parcelable

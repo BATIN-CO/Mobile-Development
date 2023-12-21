@@ -80,7 +80,6 @@ class UploadFragment : DialogFragment() {
 
     companion object {
         var EXTRA_FILE = "extra_file"
-        var EXTRA_CHOSEN = "extra_chosen"
     }
 
 }

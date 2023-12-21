@@ -7,6 +7,10 @@ import okhttp3.MultipartBody
 class ScanViewModel(private val repository: BatikRepository) : ViewModel() {
     fun uploadMotif(picture: MultipartBody.Part) = repository.uploadMotifImage(picture)
 
+    fun getDataMotif() = repository.motif
+
     fun uploadObjectDetect(picture: MultipartBody.Part) = repository.uploadObjectImage(picture)
+
+    fun getDataObject() = repository.obj
 
 }

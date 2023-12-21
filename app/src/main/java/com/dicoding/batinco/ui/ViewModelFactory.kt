@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.batinco.data.BatikRepository
 import com.dicoding.batinco.di.Injection
 import com.dicoding.batinco.ui.scan.ScanViewModel
+import com.dicoding.batinco.ui.scanresult.ScanResultViewModel
 
 class ViewModelFactory(private val repository: BatikRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -13,6 +14,9 @@ class ViewModelFactory(private val repository: BatikRepository) : ViewModelProvi
         return when {
             modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
                 ScanViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ScanResultViewModel::class.java) -> {
+                ScanResultViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
