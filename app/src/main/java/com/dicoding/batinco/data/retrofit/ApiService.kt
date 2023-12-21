@@ -17,13 +17,13 @@ import retrofit2.http.*
 
 interface ApiService {
     @Multipart
-    @POST("stories/guest")
+    @POST("object")
     suspend fun uploadImageObject(
         @Part picture: MultipartBody.Part,
     ): ObjectResponse
 
     @Multipart
-    @POST("stories/guest")
+    @POST("predict")
     suspend fun uploadImageMotif(
         @Part picture: MultipartBody.Part,
     ): MotifResponse

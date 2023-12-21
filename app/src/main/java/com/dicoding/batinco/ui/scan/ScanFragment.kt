@@ -26,6 +26,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -242,12 +243,15 @@ class ScanFragment : Fragment() {
     }
 
     internal var optionDialogListener: UploadFragment.OnOptionDialogListener = object : UploadFragment.OnOptionDialogListener {
-        override fun onOptionChosen(text: String?) {
-            Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT).show()
+        override fun onOptionChosen(text: String?, image: String?) {
+//            Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT).show()
 
+            showToast(text!!)
+            currentImageUri = image!!.toUri()
             currentImageUri?.let { uri ->
                 val imageFile = uriToFile(uri, requireActivity()).reduceFileImage()
-
+                Log.d("Image File", "showImage: ${imageFile.path}")
+                showToast(currentImageUri.toString())
                 val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
                 val multipartBody = MultipartBody.Part.createFormData(
                     "photo", imageFile.name, requestImageFile
@@ -255,6 +259,7 @@ class ScanFragment : Fragment() {
 
                 when (text) {
                     "Object detection" -> {
+                        showToast(text)
                         viewModel.uploadObjectDetect(multipartBody).observe(this@ScanFragment) { result ->
                             if (result != null) {
                                 when (result) {
@@ -277,6 +282,7 @@ class ScanFragment : Fragment() {
                         }
                     }
                     "Motif" -> {
+                        showToast(text)
                         viewModel.uploadMotif(multipartBody).observe(this@ScanFragment) { result ->
                             if (result != null) {
                                 when (result) {

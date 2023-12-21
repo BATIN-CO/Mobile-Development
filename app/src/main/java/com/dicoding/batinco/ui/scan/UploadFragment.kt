@@ -42,13 +42,13 @@ class UploadFragment : DialogFragment() {
 
         binding.btnDialogObj.setOnClickListener {
             val option = "Object Detection"
-            optionDialogListener?.onOptionChosen(option)
+            optionDialogListener?.onOptionChosen(option, currentImageUri.toString())
             dialog?.dismiss()
         }
 
         binding.btnDialogMotif.setOnClickListener {
             val option = "Motif"
-            optionDialogListener?.onOptionChosen(option)
+            optionDialogListener?.onOptionChosen(option, currentImageUri.toString())
             dialog?.dismiss()
         }
 
@@ -75,7 +75,7 @@ class UploadFragment : DialogFragment() {
     }
 
     interface OnOptionDialogListener {
-        fun onOptionChosen(text: String?)
+        fun onOptionChosen(text: String?, image: String?)
     }
 
     companion object {
