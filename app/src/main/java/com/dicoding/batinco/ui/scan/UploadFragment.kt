@@ -18,6 +18,7 @@ class UploadFragment : DialogFragment() {
     private val binding get() = _binding!!
 
     private var currentImageUri: Uri? = null
+    private var optionDialogListener: OnOptionDialogListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,16 +37,19 @@ class UploadFragment : DialogFragment() {
         }
 
         binding.btnDialogRetry.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_uploadFragment_to_navigation_scan)
             dialog?.dismiss()
         }
 
         binding.btnDialogObj.setOnClickListener {
-
+            val option = "Object Detection"
+            optionDialogListener?.onOptionChosen(option)
+            dialog?.dismiss()
         }
 
         binding.btnDialogMotif.setOnClickListener {
-
+            val option = "Motif"
+            optionDialogListener?.onOptionChosen(option)
+            dialog?.dismiss()
         }
 
     }
@@ -54,6 +58,15 @@ class UploadFragment : DialogFragment() {
         super.onAttach(context)
         val fragment = parentFragment
 
+        if (fragment is ScanFragment) {
+            this.optionDialogListener = fragment.optionDialogListener
+        }
+
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        this.optionDialogListener = null
     }
 
     override fun onDestroyView() {
@@ -61,8 +74,13 @@ class UploadFragment : DialogFragment() {
         _binding = null
     }
 
+    interface OnOptionDialogListener {
+        fun onOptionChosen(text: String?)
+    }
+
     companion object {
         var EXTRA_FILE = "extra_file"
+        var EXTRA_CHOSEN = "extra_chosen"
     }
 
 }

@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.batinco.data.response.RowsItem
 import com.dicoding.batinco.databinding.FragmentDiscoverBinding
-import com.dicoding.batinco.databinding.FragmentHomeBinding
 import com.dicoding.batinco.ui.detail.DetailActivity
 
 class DiscoverFragment : Fragment() {

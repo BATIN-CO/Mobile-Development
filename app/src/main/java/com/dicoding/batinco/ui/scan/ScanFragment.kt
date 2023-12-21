@@ -228,6 +228,12 @@ class ScanFragment : Fragment() {
         orientationEventListener.disable()
     }
 
+    internal var optionDialogListener: UploadFragment.OnOptionDialogListener = object : UploadFragment.OnOptionDialogListener {
+        override fun onOptionChosen(text: String?) {
+            Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

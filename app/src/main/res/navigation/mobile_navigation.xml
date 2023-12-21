@@ -42,15 +42,15 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_home"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_scan_to_scanResultFragment"
+            app:destination="@id/scanResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/uploadFragment"
         android:name="com.dicoding.batinco.ui.scan.UploadFragment"
         android:label="fragment_upload"
         tools:layout="@layout/fragment_upload" >
-        <action
-            android:id="@+id/action_uploadFragment_to_scanResultFragment"
-            app:destination="@id/scanResultFragment" />
         <action
             android:id="@+id/action_uploadFragment_to_navigation_scan"
             app:destination="@id/navigation_scan"
@@ -69,6 +69,12 @@
         <action
             android:id="@+id/action_scanResultFragment_to_navigation_scan"
             app:destination="@id/navigation_scan" />
+        <action
+            android:id="@+id/action_scanResultFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"
