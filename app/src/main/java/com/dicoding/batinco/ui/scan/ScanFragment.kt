@@ -2,7 +2,6 @@ package com.dicoding.batinco.ui.scan
 
 import android.Manifest
 import android.app.Activity
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -19,7 +18,6 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -30,12 +28,10 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.batinco.R
-import com.dicoding.batinco.databinding.FragmentDiscoverBinding
 import com.dicoding.batinco.databinding.FragmentScanBinding
 import com.dicoding.batinco.ui.ViewModelFactory
+import com.dicoding.batinco.ui.scanresult.ScanResultFragment
 import com.dicoding.batinco.utils.ResultState
 import com.dicoding.batinco.utils.createCustomTempFile
 import com.dicoding.batinco.utils.reduceFileImage
@@ -267,16 +263,15 @@ class ScanFragment : Fragment() {
                                         when (result) {
                                             is ResultState.Success -> {
                                                 showLoading(false)
-                                                //navigate to scan result
+//                                                val data = result.data
+//                                                //navigate to scan result
+//
+//                                                val bundle = bundleOf(
+//                                                    "photo" to image,
+//                                                    "dataObj" to data
+//                                                )
 
-//                                                val toScanResultFragment =
-//                                                    ScanFragmentDirections.actionNavigationScanToScanResultFragment()
-//                                                toScanResultFragment.photo = image
-//                                                toScanResultFragment.dataObj =
-//                                                    viewModel.getDataObject()!!
-
-//                                                view!!.findNavController()
-//                                                    .navigate(toScanResultFragment)
+                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultFragment)
                                             }
 
                                             is ResultState.Loading -> {
@@ -301,13 +296,27 @@ class ScanFragment : Fragment() {
                                             is ResultState.Success -> {
                                                 showLoading(false)
                                                 //navigate to scan result
-//                                                val toScanResultFragment =
-//                                                    ScanFragmentDirections.actionNavigationScanToScanResultFragment()
-//                                                toScanResultFragment.photo = image
-//                                                toScanResultFragment.dataMotif =
-//                                                    viewModel.getDataMotif()!!
-//                                                view!!.findNavController()
-//                                                    .navigate(toScanResultFragment)
+
+//                                                val parcelData = viewModel.getDataMotif()
+//
+//                                                val bundle = bundleOf(
+//                                                    "photo" to image,
+//                                                    "dataMotif" to parcelData
+//                                                )
+
+                                                val probabilityArray = result.data.prediction.predictedProbabilities.toDoubleArray()
+                                                val responseBundle = Bundle().apply {
+                                                    // Menambahkan dua list ke dalam Bundle
+                                                    putString(ScanResultFragment.EXTRA_PHOTO, image)
+                                                    putStringArrayList(ScanResultFragment.EXTRA_LIST1, ArrayList(result.data.prediction.predictedClassNames))
+                                                    putDoubleArray(ScanResultFragment.EXTRA_LIST2, probabilityArray)
+                                                }
+
+                                                val receiverFragment = ScanResultFragment()
+                                                receiverFragment.arguments = responseBundle
+
+                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultFragment)
+
                                             }
 
                                             is ResultState.Loading -> {

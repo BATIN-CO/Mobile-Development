@@ -16,7 +16,6 @@ data class MotifResponse(
 	val message: String
 )
 
-@Parcelize
 data class Prediction(
 
 	@field:SerializedName("predicted_class_names")
@@ -24,4 +23,4 @@ data class Prediction(
 
 	@field:SerializedName("predicted_probabilities")
 	val predictedProbabilities: List<Double>
-) : Parcelable
+)

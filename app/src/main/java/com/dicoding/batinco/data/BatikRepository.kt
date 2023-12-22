@@ -13,14 +13,10 @@ import retrofit2.HttpException
 class BatikRepository(
     private val apiService: ApiService
 ) {
-   var motif : Prediction? = null
-   var obj : ObjectResponse? = null
-
     fun uploadMotifImage(picture: MultipartBody.Part) = liveData {
         emit(ResultState.Loading)
         try {
             val successResponse = apiService.uploadImageMotif(picture)
-            fetchDataMotif(successResponse)
             emit(ResultState.Success(successResponse))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
@@ -33,21 +29,12 @@ class BatikRepository(
         emit(ResultState.Loading)
         try {
             val successResponse = apiService.uploadImageObject(picture)
-            fetchDataObject(successResponse)
             emit(ResultState.Success(successResponse))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, ObjectResponse::class.java)
             emit(ResultState.Error(errorResponse.message))
         }
-    }
-
-    private fun fetchDataMotif(response: MotifResponse) {
-        motif = response.prediction
-    }
-
-    private fun fetchDataObject(response: ObjectResponse) {
-        obj = response
     }
 
     companion object {

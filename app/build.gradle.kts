@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
-    id ("androidx.navigation.safeargs")
 }
 
 android {
@@ -17,8 +16,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "API_KEY", "\"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\"")
     }
 
     buildFeatures {
