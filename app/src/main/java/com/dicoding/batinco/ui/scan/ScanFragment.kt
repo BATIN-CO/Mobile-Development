@@ -26,6 +26,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.dicoding.batinco.R
 import com.dicoding.batinco.databinding.FragmentScanBinding
@@ -36,9 +37,8 @@ import com.dicoding.batinco.utils.ResultState
 import com.dicoding.batinco.utils.createCustomTempFile
 import com.dicoding.batinco.utils.reduceFileImage
 import com.dicoding.batinco.utils.uriToFile
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
+import id.zelory.compressor.Compressor
+import kotlinx.coroutines.launch
 
 class ScanFragment : Fragment() {
     private var _binding: FragmentScanBinding? = null
@@ -247,22 +247,26 @@ class ScanFragment : Fragment() {
                 currentImageUri = image!!.toUri()
                 currentImageUri?.let { uri ->
                     val imageFile = uriToFile(uri, requireActivity()).reduceFileImage()
-                    Log.d("Image File", "showImage: ${imageFile.path}")
-                    showToast(currentImageUri.toString())
-                    val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-                    val multipartBody = MultipartBody.Part.createFormData(
-                        "picture", imageFile.name, requestImageFile
-                    )
 
-                    when (text) {
-                        "Object Detection" -> {
-                            showToast(text)
-                            viewModel.uploadObjectDetect(multipartBody)
-                                .observe(this@ScanFragment) { result ->
-                                    if (result != null) {
-                                        when (result) {
-                                            is ResultState.Success -> {
-                                                showLoading(false)
+                    lifecycleScope.launch {
+                        val compressedImage = Compressor.compress(requireContext(), imageFile)
+                        Log.d("Image File", "showImage: ${imageFile.path}")
+                        showToast(currentImageUri.toString())
+                        showLoading(true)
+//                        val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+//                        val multipartBody = MultipartBody.Part.createFormData(
+//                            "picture", imageFile.name, requestImageFile
+//                        )
+
+                        when (text) {
+                            "Object Detection" -> {
+                                showToast(text)
+                                viewModel.uploadObjectDetect(compressedImage)
+                                    .observe(this@ScanFragment) { result ->
+                                        if (result != null) {
+                                            when (result) {
+                                                is ResultState.Success -> {
+                                                    showLoading(false)
 //                                                val data = result.data
 //                                                //navigate to scan result
 //
@@ -271,40 +275,40 @@ class ScanFragment : Fragment() {
 //                                                    "dataObj" to data
 //                                                )
 
-                                                val responseBundle = Bundle().apply {
-                                                    // Menambahkan dua list ke dalam Bundle
-                                                    putString(ScanResultObjectFragment.EXTRA_PHOTO, image)
-                                                    putString(ScanResultObjectFragment.EXTRA_RESULT, result.data.prediction)
+                                                    val responseBundle = Bundle().apply {
+                                                        // Menambahkan dua list ke dalam Bundle
+                                                        putString(ScanResultObjectFragment.EXTRA_PHOTO, image)
+                                                        putString(ScanResultObjectFragment.EXTRA_RESULT, result.data.prediction)
+                                                    }
+
+                                                    val receiverFragment = ScanResultObjectFragment()
+                                                    receiverFragment.arguments = responseBundle
+
+                                                    view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultObjectFragment, responseBundle)
                                                 }
 
-                                                val receiverFragment = ScanResultObjectFragment()
-                                                receiverFragment.arguments = responseBundle
+                                                is ResultState.Loading -> {
+                                                    showLoading(true)
+                                                }
 
-                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultObjectFragment, responseBundle)
-                                            }
-
-                                            is ResultState.Loading -> {
-                                                showLoading(true)
-                                            }
-
-                                            is ResultState.Error -> {
-                                                showLoading(false)
-                                                showToast("Server Error")
+                                                is ResultState.Error -> {
+                                                    showLoading(false)
+                                                    showToast("Server Error")
+                                                }
                                             }
                                         }
                                     }
-                                }
-                        }
+                            }
 
-                        "Motif" -> {
-                            showToast(text)
-                            viewModel.uploadMotif(multipartBody)
-                                .observe(this@ScanFragment) { result ->
-                                    if (result != null) {
-                                        when (result) {
-                                            is ResultState.Success -> {
-                                                showLoading(false)
-                                                //navigate to scan result
+                            "Motif" -> {
+                                showToast(text)
+                                viewModel.uploadMotif(compressedImage)
+                                    .observe(this@ScanFragment) { result ->
+                                        if (result != null) {
+                                            when (result) {
+                                                is ResultState.Success -> {
+                                                    showLoading(false)
+                                                    //navigate to scan result
 
 //                                                val parcelData = viewModel.getDataMotif()
 //
@@ -313,38 +317,40 @@ class ScanFragment : Fragment() {
 //                                                    "dataMotif" to parcelData
 //                                                )
 
-                                                val probabilityArray = result.data.prediction.predictedProbabilities.toDoubleArray()
-                                                val responseBundle = Bundle().apply {
-                                                    // Menambahkan dua list ke dalam Bundle
-                                                    putString(ScanResultMotifFragment.EXTRA_PHOTO, image)
-                                                    putStringArrayList(ScanResultMotifFragment.EXTRA_LIST1, ArrayList(result.data.prediction.predictedClassNames))
-                                                    putDoubleArray(ScanResultMotifFragment.EXTRA_LIST2, probabilityArray)
+                                                    val probabilityArray = result.data.prediction.predictedProbabilities.toDoubleArray()
+                                                    val responseBundle = Bundle().apply {
+                                                        // Menambahkan dua list ke dalam Bundle
+                                                        putString(ScanResultMotifFragment.EXTRA_PHOTO, image)
+                                                        putStringArrayList(ScanResultMotifFragment.EXTRA_LIST1, ArrayList(result.data.prediction.predictedClassNames))
+                                                        putDoubleArray(ScanResultMotifFragment.EXTRA_LIST2, probabilityArray)
+                                                    }
+
+                                                    val receiverFragment = ScanResultMotifFragment()
+                                                    receiverFragment.arguments = responseBundle
+
+                                                    view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultMotifFragment, responseBundle)
+
                                                 }
 
-                                                val receiverFragment = ScanResultMotifFragment()
-                                                receiverFragment.arguments = responseBundle
+                                                is ResultState.Loading -> {
+                                                    showLoading(true)
+                                                }
 
-                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultMotifFragment, responseBundle)
-
-                                            }
-
-                                            is ResultState.Loading -> {
-                                                showLoading(true)
-                                            }
-
-                                            is ResultState.Error -> {
-                                                showLoading(false)
-                                                showToast("Server Error")
+                                                is ResultState.Error -> {
+                                                    showLoading(false)
+                                                    showToast("Server Error")
+                                                }
                                             }
                                         }
                                     }
-                                }
-                        }
+                            }
 
-                        else -> {
-                            showToast("Unknown")
+                            else -> {
+                                showToast("Unknown")
+                            }
                         }
                     }
+
 
                 }
             }

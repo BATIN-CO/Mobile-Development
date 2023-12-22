@@ -2,11 +2,11 @@ package com.dicoding.batinco.ui.scan
 
 import androidx.lifecycle.ViewModel
 import com.dicoding.batinco.data.BatikRepository
-import okhttp3.MultipartBody
+import java.io.File
 
 class ScanViewModel(private val repository: BatikRepository) : ViewModel() {
-    fun uploadMotif(picture: MultipartBody.Part) = repository.uploadMotifImage(picture)
+    fun uploadMotif(picture: File) = repository.uploadMotifImage(picture)
 
-    fun uploadObjectDetect(picture: MultipartBody.Part) = repository.uploadObjectImage(picture)
+    fun uploadObjectDetect(picture: File) = repository.uploadObjectImage(picture)
 
 }
