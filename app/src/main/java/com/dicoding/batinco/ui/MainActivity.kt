@@ -31,22 +31,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val navView: BottomNavigationView = binding.navView
-//
-//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
-//        val appBarConfiguration = AppBarConfiguration.Builder(
-//            R.id.navigation_home, R.id.navigation_discover
-//        ).build()
-//
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-
-//        binding.fabMenuScan.setOnClickListener {
-//            it.findNavController().navigate(R.id.navigation_scan)
-//        }
-
-//        navView.setupWithNavController(navController)
-
         val navHostFragment = supportFragmentManager.findFragmentById(
             R.id.nav_host_fragment_activity_main
         ) as NavHostFragment
@@ -60,19 +44,6 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.navigation_home, R.id.navigation_discover)
         )
-
-//        binding.fabMenuScan.setOnClickListener {
-//            supportFragmentManager
-//                .beginTransaction().apply {
-//                    replace(
-//                        R.id.nav_host_fragment_activity_main,
-//                        ScanFragment(),
-//                        ScanFragment::class.java.simpleName
-//                    )
-//                    addToBackStack(null)
-//                    commit()
-//                }
-//        }
 
         navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
             if (nd.id == R.id.navigation_scan || nd.id == R.id.detailActivity || nd.id == R.id.scanResultMotifFragment || nd.id == R.id.scanResultObjectFragment) {

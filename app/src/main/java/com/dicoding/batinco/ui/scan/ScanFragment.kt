@@ -315,7 +315,7 @@ class ScanFragment : Fragment() {
                                                 val receiverFragment = ScanResultMotifFragment()
                                                 receiverFragment.arguments = responseBundle
 
-                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultMotifFragment)
+                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultMotifFragment, responseBundle)
 
                                             }
 

@@ -53,7 +53,7 @@ dependencies {
 
     //Image online
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
     //Handle response and API
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -75,9 +75,12 @@ dependencies {
     implementation("androidx.exifinterface:exifinterface:1.3.7")
 
     //Menggunakan library Fragment-KTX
-    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     //Paging
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+
+    //Compressor Photo
+    implementation("id.zelory:compressor:3.0.1")
 
 }

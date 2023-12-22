@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.navigation.findNavController
 import com.dicoding.batinco.R
@@ -30,6 +31,8 @@ class ScanResultMotifFragment : Fragment() {
         binding.btnScanBack.setOnClickListener {
             view.findNavController().navigate(R.id.action_fragment_scan_result_motif_to_navigation_scan)
         }
+
+        Toast.makeText(requireActivity(), arguments.toString(), Toast.LENGTH_SHORT).show()
 
         if (arguments != null) {
             val photo = arguments?.getString(EXTRA_PHOTO)!!.toUri()

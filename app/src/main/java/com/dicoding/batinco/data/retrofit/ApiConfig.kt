@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class ApiConfig {
     companion object{
@@ -15,12 +16,16 @@ class ApiConfig {
 //                    .build()
 //                chain.proceed(requestHeaders)
 //            }
+            val TIMEOUT = 15000L
 
             val loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder()
 //                .addInterceptor(authInterceptor)
                 .addInterceptor(loggingInterceptor)
+                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .build()
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://backend-md-dot-capstone-ch2-ps526.et.r.appspot.com/")
