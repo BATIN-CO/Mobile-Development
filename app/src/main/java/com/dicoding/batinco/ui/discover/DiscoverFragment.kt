@@ -63,16 +63,12 @@ class DiscoverFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-
+        binding.progressBar2.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-//    companion object {
-//        const val EXTRA_ID = "extra_id"
-//    }
 
 }

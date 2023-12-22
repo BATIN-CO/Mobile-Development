@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BATIN.CO</string>
+
+    <string name="item_store">Nama Toko</string>
+    <string name="item_address">Alamat Toko</string>
+    <string name="item_operational_distance">%1$s • %1$s km</string>
+    <string name="item_arrow">Buka ini di Gmaps</string>
+
+    <string name="batik_name">Nama Batik</string>
+    <string name="batik_origin">Asal Batik</string>
+
+    <string name="detail_meaning">Makna Batik</string>
+    <string name="detail_share">Bagikan</string>
+
+    <string name="scan">Hasil Scan</string>
+    <string name="scan_percent">100%</string>
+    <string name="scan_back">Kembali ke Kamera</string>
+
+    <string name="scan_result">Hasil scan dari Deteksi Objek</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_discover">Discover</string>
+    <string name="menu_scan">Scan Batik</string>
+
+    <string name="home_search_hint">Cari batik</string>
+    <string name="home_greeting">Halo!\nTeman</string>
+    <string name="home_scan_button">Temukan batikmu disini!</string>
+    <string name="home_content_title">Temukan keindahan Batik Indonesia</string>
+
+    <string name="cam_capture">Ambil foto</string>
+
+    <string name="dialog_title">Pilih satu..</string>
+    <string name="dialog_confirm">Unggah foto ini?</string>
+    <string name="dialog_retry">Ulang</string>
+    <string name="dialog_object_detect">Deteksi Batik</string>
+    <string name="dialog_object_detect_desc">Identifikasi batik\ndari pakaian</string>
+    <string name="dialog_motif">Deteksi Motif</string>
+    <string name="dialog_motif_desc">Menentukan motif\ndari kain batik</string>
+
+</resources>

@@ -306,18 +306,9 @@ class ScanFragment : Fragment() {
                                             when (result) {
                                                 is ResultState.Success -> {
                                                     showLoading(false)
-                                                    //navigate to scan result
-
-//                                                val parcelData = viewModel.getDataMotif()
-//
-//                                                val bundle = bundleOf(
-//                                                    "photo" to image,
-//                                                    "dataMotif" to parcelData
-//                                                )
 
                                                     val probabilityArray = result.data.prediction.predictedProbabilities.toDoubleArray()
                                                     val responseBundle = Bundle().apply {
-                                                        // Menambahkan dua list ke dalam Bundle
                                                         putString(ScanResultMotifFragment.EXTRA_PHOTO, image)
                                                         putStringArrayList(ScanResultMotifFragment.EXTRA_LIST1, ArrayList(result.data.prediction.predictedClassNames))
                                                         putDoubleArray(ScanResultMotifFragment.EXTRA_LIST2, probabilityArray)
