@@ -15,6 +15,8 @@
     <string name="scan_percent">%1$s%</string>
     <string name="scan_back">Back to Camera</string>
 
+    <string name="scan_result">Scan Result of Object Detection</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_discover">Discover</string>
     <string name="menu_scan">Scan Batik</string>
@@ -22,6 +24,7 @@
     <string name="home_search_hint">Search batik</string>
     <string name="home_greeting">Greeting!\nFriends</string>
     <string name="home_scan_button">Discover your batik here!</string>
+    <string name="home_content_title">Discover the beauty of Batik Indonesia</string>
 
     <string name="error">Timeout</string>
     <string name="reload">Reload</string>

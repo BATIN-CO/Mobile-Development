@@ -43,8 +43,11 @@
             app:popUpTo="@id/navigation_home"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_navigation_scan_to_scanResultFragment"
-            app:destination="@id/scanResultFragment" />
+            android:id="@+id/action_navigation_scan_to_scanResultObjectFragment"
+            app:destination="@id/scanResultObjectFragment" />
+        <action
+            android:id="@+id/action_navigation_scan_to_scanResultMotifFragment"
+            app:destination="@id/scanResultMotifFragment" />
     </fragment>
     <fragment
         android:id="@+id/uploadFragment"
@@ -59,18 +62,15 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/scanResultFragment"
-        android:name="com.dicoding.batinco.ui.scanresult.ScanResultFragment"
-        android:label="fragment_scan_result"
-        tools:layout="@layout/fragment_scan_result" >
+        android:id="@+id/scanResultObjectFragment"
+        android:name="com.dicoding.batinco.ui.scanresult.ScanResultObjectFragment"
+        android:label="fragment_scan_result_object"
+        tools:layout="@layout/fragment_scan_result_object" >
         <action
-            android:id="@+id/action_scanResultFragment_to_detailActivity"
-            app:destination="@id/detailActivity" />
-        <action
-            android:id="@+id/action_scanResultFragment_to_navigation_scan"
+            android:id="@+id/action_fragment_scan_result_object_to_navigation_scan"
             app:destination="@id/navigation_scan" />
         <action
-            android:id="@+id/action_scanResultFragment_to_navigation_home"
+            android:id="@+id/action_fragment_scan_result_object_to_navigation_home"
             app:destination="@id/navigation_home"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_home"
@@ -81,6 +81,25 @@
         android:name="com.dicoding.batinco.ui.detail.DetailActivity"
         android:label="activity_detail"
         tools:layout="@layout/activity_detail" />
+    <fragment
+        android:id="@+id/scanResultMotifFragment"
+        android:name="com.dicoding.batinco.ui.scanresult.ScanResultMotifFragment"
+        android:label="fragment_scan_result_motif"
+        tools:layout="@layout/fragment_scan_result_motif">
+        <action
+            android:id="@+id/action_fragment_scan_result_motif_to_detailActivity"
+            app:destination="@id/detailActivity" />
+        <action
+            android:id="@+id/action_fragment_scan_result_motif_to_navigation_scan"
+            app:destination="@id/navigation_scan" />
+        <action
+            android:id="@+id/action_fragment_scan_result_motif_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
 
 </navigation>
 

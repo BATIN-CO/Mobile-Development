@@ -25,13 +25,13 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.dicoding.batinco.R
 import com.dicoding.batinco.databinding.FragmentScanBinding
 import com.dicoding.batinco.ui.ViewModelFactory
-import com.dicoding.batinco.ui.scanresult.ScanResultFragment
+import com.dicoding.batinco.ui.scanresult.ScanResultMotifFragment
+import com.dicoding.batinco.ui.scanresult.ScanResultObjectFragment
 import com.dicoding.batinco.utils.ResultState
 import com.dicoding.batinco.utils.createCustomTempFile
 import com.dicoding.batinco.utils.reduceFileImage
@@ -271,7 +271,7 @@ class ScanFragment : Fragment() {
 //                                                    "dataObj" to data
 //                                                )
 
-                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultFragment)
+                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultObjectFragment)
                                             }
 
                                             is ResultState.Loading -> {
@@ -307,15 +307,15 @@ class ScanFragment : Fragment() {
                                                 val probabilityArray = result.data.prediction.predictedProbabilities.toDoubleArray()
                                                 val responseBundle = Bundle().apply {
                                                     // Menambahkan dua list ke dalam Bundle
-                                                    putString(ScanResultFragment.EXTRA_PHOTO, image)
-                                                    putStringArrayList(ScanResultFragment.EXTRA_LIST1, ArrayList(result.data.prediction.predictedClassNames))
-                                                    putDoubleArray(ScanResultFragment.EXTRA_LIST2, probabilityArray)
+                                                    putString(ScanResultMotifFragment.EXTRA_PHOTO, image)
+                                                    putStringArrayList(ScanResultMotifFragment.EXTRA_LIST1, ArrayList(result.data.prediction.predictedClassNames))
+                                                    putDoubleArray(ScanResultMotifFragment.EXTRA_LIST2, probabilityArray)
                                                 }
 
-                                                val receiverFragment = ScanResultFragment()
+                                                val receiverFragment = ScanResultMotifFragment()
                                                 receiverFragment.arguments = responseBundle
 
-                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultFragment)
+                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultMotifFragment)
 
                                             }
 
