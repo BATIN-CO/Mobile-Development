@@ -249,7 +249,6 @@ class ScanFragment : Fragment() {
                     lifecycleScope.launch {
                         val compressedImage = Compressor.compress(requireContext(), imageFile)
                         Log.d("Image File", "showImage: ${imageFile.path}")
-                        showToast(currentImageUri.toString())
                         showLoading(true)
 //                        val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
 //                        val multipartBody = MultipartBody.Part.createFormData(
@@ -258,7 +257,6 @@ class ScanFragment : Fragment() {
 
                         when (text) {
                             "Object Detection" -> {
-                                showToast(text)
                                 viewModel.uploadObjectDetect(compressedImage)
                                     .observe(this@ScanFragment) { result ->
                                         if (result != null) {
@@ -299,7 +297,6 @@ class ScanFragment : Fragment() {
                             }
 
                             "Motif" -> {
-                                showToast(text)
                                 viewModel.uploadMotif(compressedImage)
                                     .observe(this@ScanFragment) { result ->
                                         if (result != null) {

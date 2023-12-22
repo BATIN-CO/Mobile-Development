@@ -17,6 +17,7 @@
     <string name="scan">Hasil Scan</string>
     <string name="scan_percent">100%</string>
     <string name="scan_back">Kembali ke Kamera</string>
+    <string name="scan_home">Kembali ke Home</string>
 
     <string name="scan_result">Hasil scan dari Deteksi Objek</string>
 

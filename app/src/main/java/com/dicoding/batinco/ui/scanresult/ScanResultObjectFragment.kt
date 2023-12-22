@@ -30,6 +30,9 @@ class ScanResultObjectFragment : Fragment() {
         binding.btnScanBackObj.setOnClickListener {
             view.findNavController().navigate(R.id.action_fragment_scan_result_object_to_navigation_scan)
         }
+        binding.btnScanHomeObj.setOnClickListener {
+            view.findNavController().navigate(R.id.action_fragment_scan_result_object_to_navigation_home)
+        }
 
         if (arguments != null) {
             val photo = arguments?.getString(EXTRA_PHOTO)!!.toUri()
