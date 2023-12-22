@@ -188,8 +188,6 @@ class ScanFragment : Fragment() {
         )
     }
 
-    //Stuck dibagian ini, expect: kirim file yang didapat baik gallery atau kamera ke dialogfragment upload
-    //Show success, but no data yet
     fun showDialog(bundle: Bundle) {
         val uploadDialogFragment = UploadFragment()
         uploadDialogFragment.arguments = bundle
