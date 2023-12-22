@@ -87,9 +87,6 @@
         android:label="fragment_scan_result_motif"
         tools:layout="@layout/fragment_scan_result_motif">
         <action
-            android:id="@+id/action_fragment_scan_result_motif_to_detailActivity"
-            app:destination="@id/detailActivity" />
-        <action
             android:id="@+id/action_fragment_scan_result_motif_to_navigation_scan"
             app:destination="@id/navigation_scan" />
         <action

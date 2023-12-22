@@ -96,7 +96,7 @@ class ScanFragment : Fragment() {
         binding.ivCamGallery.setOnClickListener { startGallery() }
     }
 
-    public override fun onResume() {
+    override fun onResume() {
         super.onResume()
         hideSystemUI(requireActivity())
         startCamera()
@@ -271,7 +271,16 @@ class ScanFragment : Fragment() {
 //                                                    "dataObj" to data
 //                                                )
 
-                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultObjectFragment)
+                                                val responseBundle = Bundle().apply {
+                                                    // Menambahkan dua list ke dalam Bundle
+                                                    putString(ScanResultObjectFragment.EXTRA_PHOTO, image)
+                                                    putString(ScanResultObjectFragment.EXTRA_RESULT, result.data.prediction)
+                                                }
+
+                                                val receiverFragment = ScanResultObjectFragment()
+                                                receiverFragment.arguments = responseBundle
+
+                                                view!!.findNavController().navigate(R.id.action_navigation_scan_to_scanResultObjectFragment, responseBundle)
                                             }
 
                                             is ResultState.Loading -> {

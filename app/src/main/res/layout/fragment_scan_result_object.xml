@@ -40,9 +40,10 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/tv_scan_result_obj"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="10dp"
             android:gravity="center"
             android:maxLines="3"
             android:textSize="18sp"

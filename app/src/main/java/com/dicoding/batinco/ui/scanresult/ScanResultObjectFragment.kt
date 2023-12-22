@@ -35,6 +35,9 @@ class ScanResultObjectFragment : Fragment() {
             val photo = arguments?.getString(EXTRA_PHOTO)!!.toUri()
             binding.ivScanPhotoObj.setImageURI(photo)
             Log.d("ScanResultFragment", photo.toString())
+
+            val result = arguments?.getString(EXTRA_RESULT)
+            binding.tvScanResultObj.text = result
         }
 
     }

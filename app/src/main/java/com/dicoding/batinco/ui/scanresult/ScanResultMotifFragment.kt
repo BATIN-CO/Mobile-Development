@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.batinco.R
+import com.dicoding.batinco.data.model.PredictionModel
 import com.dicoding.batinco.databinding.FragmentScanResultMotifBinding
+import kotlin.math.min
 
 class ScanResultMotifFragment : Fragment() {
 
@@ -38,6 +41,23 @@ class ScanResultMotifFragment : Fragment() {
             val photo = arguments?.getString(EXTRA_PHOTO)!!.toUri()
             binding.ivScanPhoto.setImageURI(photo)
             Log.d("ScanResultFragment", photo.toString())
+
+            val layoutManager = LinearLayoutManager(context)
+            binding.rvScanResult.layoutManager = layoutManager
+
+            val dataList = arguments?.getStringArrayList(EXTRA_LIST1)
+            val dataList2 = arguments?.getDoubleArray(EXTRA_LIST2)
+
+            val predictionList = mutableListOf<PredictionModel>()
+            val minLength = min(dataList!!.size, dataList2!!.size)
+
+            for (i in 0 until minLength) {
+                val predictionModel = PredictionModel(dataList2[i], arrayListOf(dataList[i]))
+                predictionList.add(predictionModel)
+            }
+
+            val adapter = ScanResultAdapter(predictionList)
+            binding.rvScanResult.adapter = adapter
         }
 
     }

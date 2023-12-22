@@ -22,11 +22,11 @@ class DiscoverAdapter : ListAdapter<RowsItem, DiscoverAdapter.MyViewHolder>(DIFF
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val user = getItem(position)
-        holder.bind(user)
+        val batik = getItem(position)
+        holder.bind(batik)
 
         holder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(user)
+            onItemClickCallback.onItemClicked(batik)
         }
     }
 
